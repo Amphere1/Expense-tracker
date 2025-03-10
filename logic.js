@@ -130,18 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function processCategory(category) {
-        // Add debug logging at the start
-        console.log('Starting to process category:', {
-            category: category,
-            hasCategortText: !!category.querySelector('.category-text'),
-            itemCount: category.querySelectorAll('.category-list li').length,
-            inputs: {
-                names: category.querySelectorAll('.item-input').length,
-                prices: category.querySelectorAll('.price-input').length,
-                quantities: category.querySelectorAll('.qty-input').length
-            }
-        });
-
         console.log('Processing category:', category);
 
         const categoryText = category.querySelector('.category-text');
@@ -150,11 +138,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return null;
         }
 
-        const categoryName = categoryText.textContent.trim();
+        // Get category name or use default if empty
+        let categoryName = categoryText.textContent.trim();
         if (!categoryName || categoryName === 'Category:') {
-            console.log('Empty or default category name');
-            alert('Please name all categories');
-            return null;
+            categoryName = 'Unnamed Category'; // Default name instead of showing alert
         }
 
         const items = [];
